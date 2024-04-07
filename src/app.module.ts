@@ -7,7 +7,9 @@ import { CategoryModule, FoodModule, IngredientModule } from './routes';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    MongooseModule.forRoot(process.env.MONGODB_URL),
+    MongooseModule.forRoot(
+      'mongodb+srv://noreplyteamcook:bGiWILmAmDTi0WoH@hungkymenucluster.9de1hpt.mongodb.net/hungky_menu_database',
+    ),
     CategoryModule,
     FoodModule,
     IngredientModule,
