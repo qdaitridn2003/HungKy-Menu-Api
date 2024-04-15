@@ -34,9 +34,13 @@ export class FoodService {
   async fetchListFood(limit: number = 10, page: number = 1, name: string) {
     try {
       const offset = limit * (page - 1);
-      const foodQuery = this.foodModel
-        .find()
-        .select({ _id: true, name: true, image: true, description: true });
+      const foodQuery = this.foodModel.find().select({
+        _id: true,
+        name: true,
+        image: true,
+        description: true,
+        isBestSeller: true,
+      });
 
       if (name) {
         foodQuery.and([{ name: { $regex: `.*${name}.*`, $options: 'i' } }]);

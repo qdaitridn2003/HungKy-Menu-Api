@@ -18,6 +18,9 @@ export class Food {
   @Prop()
   image: string;
 
+  @Prop()
+  isBestSeller: boolean;
+
   @Prop(
     raw([
       {
