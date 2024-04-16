@@ -2,7 +2,12 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { CategoryModule, FoodModule, IngredientModule } from './routes';
+import {
+  CategoryModule,
+  FoodModule,
+  IngredientModule,
+  ToppingModule,
+} from './routes';
 
 @Module({
   imports: [
@@ -11,6 +16,7 @@ import { CategoryModule, FoodModule, IngredientModule } from './routes';
     CategoryModule,
     FoodModule,
     IngredientModule,
+    ToppingModule,
   ],
   controllers: [],
   providers: [],

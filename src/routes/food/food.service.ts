@@ -10,7 +10,6 @@ export class FoodService {
   constructor(@InjectModel(Food.name) private foodModel: Model<Food>) {}
 
   async addFood(param: CreateFoodParam) {
-    console.log('Param:', param);
     try {
       const createdFood = await this.foodModel.create({
         name: param.name,
@@ -20,8 +19,6 @@ export class FoodService {
         category: param.category,
         ingredients: param.ingredients,
       });
-
-      console.log('Created Food:', createdFood);
 
       return {
         food: createdFood,
@@ -34,13 +31,19 @@ export class FoodService {
   async fetchListFood(limit: number = 10, page: number = 1, name: string) {
     try {
       const offset = limit * (page - 1);
-      const foodQuery = this.foodModel.find().select({
-        _id: true,
-        name: true,
-        image: true,
-        description: true,
-        isBestSeller: true,
-      });
+      const foodQuery = this.foodModel
+        .find()
+        .select({
+          _id: true,
+          name: true,
+          image: true,
+          description: true,
+          isBestSeller: true,
+        })
+        .populate({
+          path: 'category',
+          select: { _id: true, name: true, description: true },
+        });
 
       if (name) {
         foodQuery.and([{ name: { $regex: `.*${name}.*`, $options: 'i' } }]);
